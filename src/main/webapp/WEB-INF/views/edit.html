@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<div class="col-2">
+    <div class="form-container">
+        <div class="form-btn">
+
+            <span>Edit Product</span>
+        </div>
+        <form  method="post" th:object="${student}" enctype="multipart/form-data" >
+            <table>
+                <td><input th:field="*{id}"></td>
+                <td><input th:field="*{name}"></td>
+                <td><input th:field="*{age}"></td>
+                <select name="idClassZoom">
+                    <option th:each="c : ${classZooms}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+                <td><img th:src="${student.img}" width="200" height="150" alt=""></td>
+                <td><input type="file" name="uppImg"></td>
+
+                <button type="submit" class="btn">Register</button>
+            </table>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
