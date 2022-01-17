@@ -70,22 +70,28 @@ public class StudentController {
         classRoom.setId(idClassZoom);
         student.setClassRoom(classRoom);
         String nameFile = upImg.getOriginalFilename();
-        try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF\\img\\" + nameFile));
-            String imgOld = studentService.findById(student.getId()).getImg();
-            student.setImg("/img/"+nameFile);
-                if(!imgOld.equals(student.getImg())) {
+        String imgOld = studentService.findById(student.getId()).getImg();
+        if(!nameFile.equals("")) {
+            try {
+                FileCopyUtils.copy(upImg.getBytes(), new File("C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF\\img\\" + nameFile));
+                student.setImg("/img/" + nameFile);
+                if (!imgOld.equals(student.getImg()) && !imgOld.equals("/img/abc.jpeg")) {
                     String file1 = "C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF" + imgOld;
                     File file = new File(file1);
                     if (file.exists()) {
                         file.delete();
                     }
                 }
-            studentService.save(student);
-        } catch (IOException e) {
-            studentService.save(student);
-            e.printStackTrace();
+                studentService.save(student);
+            } catch (IOException e) {
+                student.setImg(imgOld);
+                studentService.save(student);
+                e.printStackTrace();
+            }
+            return "redirect:/students";
         }
+        student.setImg(imgOld);
+        studentService.save(student);
         return "redirect:/students";
     }
     @GetMapping("/delete")
