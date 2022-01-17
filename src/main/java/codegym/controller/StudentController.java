@@ -90,10 +90,12 @@ public class StudentController {
     }
     @GetMapping("/delete")
     public String deleteCustomer(@RequestParam int id,@RequestParam String img){
-        System.out.println(img);
-        String file1 = "C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF" +img;
-        File file = new File(file1);
-        file.delete();
+        if(!img.equals("")){
+            String file1 = "C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF" +img;
+            File file = new File(file1);
+            file.delete();
+        }
+
         studentService.delete(id);
         return "redirect:/students";
     }
