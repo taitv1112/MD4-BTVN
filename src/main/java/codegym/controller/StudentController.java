@@ -46,7 +46,7 @@ public class StudentController {
 
         String nameFile = upImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("/Users/johntoan98gmail.com/Desktop/Module3/Demo_Spring_Repository/src/main/webapp/WEB-INF/img/" + nameFile));
+            FileCopyUtils.copy(upImg.getBytes(), new File("C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF\\img\\" + nameFile));
             student.setImg("/img/"+nameFile);
             studentService.save(student);
 
@@ -72,7 +72,7 @@ public class StudentController {
         String nameFile = upImg.getOriginalFilename();
         try {
             FileCopyUtils.copy(upImg.getBytes(), new File("C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF\\img\\" + nameFile));
-            String imgOld = student.getImg();
+            String imgOld = studentService.findById(student.getId()).getImg();
             student.setImg("/img/"+nameFile);
                 if(!imgOld.equals(student.getImg())) {
                     String file1 = "C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF" + imgOld;
@@ -86,6 +86,15 @@ public class StudentController {
             studentService.save(student);
             e.printStackTrace();
         }
+        return "redirect:/students";
+    }
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam int id,@RequestParam String img){
+        System.out.println(img);
+        String file1 = "C:\\Users\\Lovin\\Downloads\\Demo_Repository_JPA-master\\Demo_Repository_JPA-master\\src\\main\\webapp\\WEB-INF" +img;
+        File file = new File(file1);
+        file.delete();
+        studentService.delete(id);
         return "redirect:/students";
     }
 }

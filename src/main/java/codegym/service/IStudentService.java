@@ -9,5 +9,5 @@ public interface IStudentService {
     public List<Student> findAll();
     public void save(Student student);
     public void delete(long id);
-    public Optional<Student> findById(long id);
+    public Student findById(long id);
 }

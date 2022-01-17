@@ -21,7 +21,7 @@
         <td > <img th:src="${s.img}" height="150" width="200"></td>
         <td th:text="${s.classRoom.name}"></td>
         <td><a th:href="@{/edit(index=${loop.index})}">edit</a></td>
-        <td><a th:href="@{/delete(index=${loop.index})}">delete</a></td>
+        <td><a th:href="@{/delete(id=${s.id})(img=${s.img})}">delete</a></td>
     </tr>
 </table>
 </body>

@@ -21,7 +21,8 @@
                     <option th:each="c : ${classZooms}" th:value="${c.id}" th:text="${c.name}"></option>
                 </select>
                 <td><img th:src="${student.img}" width="200" height="150" alt=""></td>
-                <td><input type="file" name="uppImg"></td>
+                <td><input type="file" name="upImg"></td>
+                <<input th:field="*{img}" hidden>
 
                 <button type="submit" class="btn">Register</button>
             </table>
